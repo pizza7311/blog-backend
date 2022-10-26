@@ -1,0 +1,51 @@
+scalar Date
+
+type Query{
+    posts(category:String,page:String,tag:String):posts
+    post(urlSlug:String!,category:String!):post
+    postById(_id:String!):post
+}
+
+type Mutation{
+    createPost(title:String!,body:String!,thumbnail:String,urlSlug:String!,category:String!,bodyDescription:String,tags:[String]):postResult
+}
+
+type Mutation{
+    presignedURL(type:String!):presignedURL
+}
+
+type Mutation{
+    updatePost(title:String!,body:String!,thumbnail:String,urlSlug:String!,category:String!,bodyDescription:String,tags:[String],_id:String!):updateResult
+}
+
+type presignedURL{
+    url:String!
+    key:String!
+}
+
+type postResult{
+    postID:String!
+    urlSlug:String!
+}
+
+type updateResult{
+    postID:String!
+}
+
+type post{
+    _id:String
+    title:String
+    body:String
+    bodyDescription:String
+    tags:[String]
+    category:String
+    thumbnail:String
+    date:Date
+    urlSlug:String
+}
+
+type posts{
+    posts:[post],
+    hasNext:Boolean,
+    hasPrev:Boolean
+}

@@ -1,0 +1,11 @@
+type Query{
+    categories:[category]
+    category(urlSlug:String!):category
+}
+
+type category{
+    id:ID               #카테고리 mongoDB ID
+    urlSlug:String         #카테고리 url slug
+    name:String         #한글이름
+    numberOfPosts:Int   #카테고리의 포스트 수
+}

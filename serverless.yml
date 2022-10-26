@@ -1,0 +1,42 @@
+service: pizza7311-blog-server
+
+# plugins:
+#   - serverless-domain-manager
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  timeout: 10
+
+  stage: dev
+  region: ap-northeast-2
+
+  vpc:
+    securityGroupIds:
+      - sg-04b782efc01a57a08
+    subnetIds:
+      - subnet-072d4febc68fec97f
+  
+  environment:
+    TOKEN_KEY: ${env:TOKEN_KEY}
+    DB_URL: ${env:DB_URL}
+ 
+# custom:
+#   customDomain:
+#     domainName: api.pizza7311.me
+#     stage: ${self:provider.stage}
+#     endpointType: regional
+#     certificateName: '*.pizza7311.me'
+#     apiType: http
+#     createRoute53Record: true
+
+functions:
+  app:
+    handler: src/serverless.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+      - http:
+          path: /{any+}
+          method: ANY

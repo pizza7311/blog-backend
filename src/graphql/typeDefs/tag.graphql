@@ -1,0 +1,9 @@
+type Query{
+    tags:[tag]
+    tag:tag
+}
+
+type tag{
+    tagname:String
+    count:Int
+}
